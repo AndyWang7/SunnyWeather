@@ -9,10 +9,18 @@ import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
 
+//网络数据源 访问入口 对接口进行封装
+
 //使用suspendCoroutine函数简化Retrofit的回调  P473
 object SunnyWeatherNetwork {
+    private val weatherService = ServiceCreator.create(WeatherService::class.java)
+
     private val placeService = ServiceCreator.create(PlaceService::class.java)
     suspend fun searchPlaces(query: String) = placeService.searchPlace(query).await()
+
+    //对WeatherService中新增的接口进行封装
+    suspend fun getDailyWeather(lng: String,lat: String) = weatherService.getDailyWeather(lng,lat).await()
+    suspend fun getRealtimeWeather(lng: String,lat: String) = weatherService.getRealtimeWeather(lng,lat).await()
 
     //挂起函数，调用里面的suspendCoroutline 之后立刻被挂起
     private suspend fun<T> Call<T>.await(): T{
