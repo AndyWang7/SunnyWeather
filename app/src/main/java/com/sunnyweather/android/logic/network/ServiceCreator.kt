@@ -15,7 +15,8 @@ object ServiceCreator {
 
     //根据传入的类调用create()方法创建 相应的Service接口的动态代理对象
     fun <T>create(serviceClass: Class<T>): T = retrofit.create(serviceClass)
-    //泛型实例化  获取接口的动态代理对象
+   // 获取接口的动态代理对象写法如下：
     //var appService = ServiceCreator.create<AppService>()
+   //泛型实例化
     inline fun <reified T>create(): T = create(T::class.java)
 }
