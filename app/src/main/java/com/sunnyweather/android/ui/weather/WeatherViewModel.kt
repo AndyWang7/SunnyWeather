@@ -17,7 +17,7 @@ class WeatherViewModel : ViewModel(){
     var placeName = ""
 
     //调用switchMap观察locationLiveData对象 发生变化调用仓库层 refreshWeather方法得到真正的数据
-    //switchMap 接收两个参数 第一个刚定义的要观察的LiveData对象， 第二个参数是个转换函数   di返回一个LIveData对象 location  并且switchMap把它转换成可观察的
+    //switchMap 接收两个参数 第一个刚定义的要观察的LiveData对象， 第二个参数是个转换函数   di返回一个LiveData对象 location  并且switchMap把它转换成可观察的
     val weatherLiveData = Transformations.switchMap(locationLiveData){ location ->
         Repository.refreshWeather(location.lng, location.lat)
     }
