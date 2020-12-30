@@ -34,4 +34,5 @@ private val sky = mapOf(
 )
 fun getSky(skycon: String): Sky{
     return sky[skycon] ?: sky["CLEAR_DAY"]!!
+        //!!为非空断言
 }
