@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import com.sunnyweather.android.logic.Repository
 
 class WeatherViewModel : ViewModel(){
-    //对象
+    //LiveData对象
     private val locationLiveData = MutableLiveData<com.sunnyweather.android.logic.model.Location>()
 
     var locationLng = ""
