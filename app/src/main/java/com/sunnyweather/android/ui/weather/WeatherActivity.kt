@@ -1,5 +1,6 @@
 package com.sunnyweather.android.ui.weather
 
+import android.graphics.Color
 import android.media.Image
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -26,6 +27,10 @@ class WeatherActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val decorView = window.decorView
+        decorView.systemUiVisibility =
+                View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        window.statusBarColor = Color.TRANSPARENT
         setContentView(R.layout.activity_weather)
         if (viewModel.locationLng.isEmpty()){
             viewModel.locationLng = intent.getStringExtra("location_lng") ?: ""
@@ -36,7 +41,7 @@ class WeatherActivity : AppCompatActivity() {
         if (viewModel.placeName.isEmpty()){
             viewModel.placeName = intent.getStringExtra("place_name") ?: ""
         }
-        viewModel.weatherLiveData.observe(this, Observer {result ->
+        viewModel.weatherLiveData.observe(this,Observer{result ->
             val weather = result.getOrNull()
             if (weather != null){
                 showWeatherInfo(weather)
@@ -90,5 +95,4 @@ class WeatherActivity : AppCompatActivity() {
         carWashingText.text = lifeIndex.carWashing[0].desc
         weatherLayout.visibility = View.VISIBLE
     }
-
 }
